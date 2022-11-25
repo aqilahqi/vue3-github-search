@@ -1,4 +1,4 @@
-# vue3-github-search
+# vue3-github-search (in-progress)
 
 Search github repositories using github API. User can mark a repo as favourite and view it in a favourite list.
 
