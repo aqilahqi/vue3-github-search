@@ -22,44 +22,28 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { ref, computed } from "vue";
 import { useRepoStore } from "@/stores/RepoStore";
 import { mdiMagnify } from "@mdi/js";
 
-export default {
-  setup() {
-    const store = useRepoStore();
-    const loading = ref(false);
+const store = useRepoStore();
+const loading = ref(false);
 
-    const disable = computed(() => {
-      if (store.searchWord.length === 0) return true;
-      return false;
-    });
+const disable = computed(() => {
+  if (store.searchWord.length === 0) return true;
+  return false;
+});
 
-    const onSubmit = () => {
-      if (store.searchWord.length === 0) return;
+const onSubmit = () => {
+  if (store.searchWord.length === 0) return;
 
-      loading.value = true;
+  loading.value = true;
 
-      setTimeout(() => (loading.value = false), 2000);
-    };
+  setTimeout(() => (loading.value = false), 2000);
+};
 
-    const onClear = () => {
-      store.searchWord = "";
-    };
-
-    return {
-      store,
-      loading,
-      disable,
-
-      // functions
-      onSubmit,
-      onClear,
-      // icons
-      mdiMagnify,
-    };
-  },
+const onClear = () => {
+  store.searchWord = "";
 };
 </script>

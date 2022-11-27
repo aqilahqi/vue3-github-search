@@ -5,15 +5,9 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { useRepoStore } from "@/stores/RepoStore";
 import Search from "./components/Search.vue";
-export default {
-  components: { Search },
-  setup() {
-    const repoStore = useRepoStore();
 
-    return { repoStore };
-  },
-};
+const repoStore = useRepoStore();
 </script>
