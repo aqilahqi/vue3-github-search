@@ -1,11 +1,12 @@
 <template>
-  <div>
+  <div class="mb-4">
     <v-form @submit.prevent="onSubmit" class="d-flex align-center">
       <v-text-field
         clearable
         hide-details
+        :disabled="loading"
         variant="underlined"
-        label="Search"
+        placeholder="Search a repository"
         v-model="store.searchWord"
         @click:clear="onClear"
       ></v-text-field>
@@ -39,8 +40,15 @@ const onSubmit = () => {
   if (store.searchWord.length === 0) return;
 
   loading.value = true;
-
-  setTimeout(() => (loading.value = false), 2000);
+  store
+    .getRepoList()
+    .then((promise) => {
+      console.log(promise);
+      loading.value = false;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 };
 
 const onClear = () => {

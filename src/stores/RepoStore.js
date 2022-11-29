@@ -9,16 +9,7 @@ const api = axios.create({
 
 export const useRepoStore = defineStore("repoStore", {
   state: () => ({
-    list: [
-      {
-        id: 1,
-        name: "Task 1",
-      },
-      {
-        id: 2,
-        name: "Task 2",
-      },
-    ],
+    list: [],
     pagination: {
       page: 1,
       per_page: 10,
@@ -28,32 +19,35 @@ export const useRepoStore = defineStore("repoStore", {
     single: {},
     history: [],
   }),
+  actions: {
+    getRepoList() {
+      return new Promise((resolve, reject) => {
+        api
+          .get("", {
+            params: {
+              sort: this.pagination.sort,
+              per_page: this.pagination.per_page,
+              page: this.pagination.page,
+              q: this.searchWord,
+            },
+          })
+          .then((response) => {
+            this.list = [];
+            response.data.items.map((item) => {
+              this.list.push(item);
+            });
+            resolve("list retrieved");
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      });
+    },
+  },
 });
 
 // id: "repo",
 
 // // State
 
-// actions: {
-//   getRepoList() {
-//     return new Promise((resolve, reject) => {
-//       api
-//         .get("", {
-//           params: {
-//             sort: pagination.value.sort,
-//             per_page: pagination.value.per_page,
-//             page: pagination.value.page,
-//             q: searchWord.value,
-//           },
-//         })
-//         .then((res) => {
-//           list.value.push(res.data);
-//           resolve("list retrieved");
-//         })
-//         .catch((error) => {
-//           reject(error);
-//         });
-//     });
-//   },
-// },
 // getters: {},

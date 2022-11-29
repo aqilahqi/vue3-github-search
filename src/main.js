@@ -11,7 +11,7 @@ import { aliases, mdi } from "vuetify/iconsets/mdi-svg";
 import * as components from "vuetify/components";
 import * as directives from "vuetify/directives";
 
-import "./assets/main.scss";
+import "./assets/scss/main.scss";
 
 const vuetify = createVuetify({
   components,
