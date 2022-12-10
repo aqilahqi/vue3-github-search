@@ -24,7 +24,7 @@
     </template>
     <template v-slot:text>
       <p class="font-weight-light">{{ item.description }}</p>
-      <div class="ratings-wrapper mt-3 d-flex">
+      <div class="ratings-wrapper mt-3 d-flex align-center">
         <div class="star d-flex mr-3">
           <v-avatar :size="18">
             <v-img :src="star" alt="stars"></v-img>
@@ -42,6 +42,16 @@
             <v-img :src="fork" alt="fork"></v-img>
           </v-avatar>
           <span class="text-light ml-1">{{ item.forks_count }}</span>
+        </div>
+        <div v-if="item.homepage">
+          <v-btn
+            :href="item.homepage"
+            target="_blank"
+            variant="plain"
+            color="primary"
+            class="pa-0 text-decoration-underline text-capitalize"
+            >Website</v-btn
+          >
         </div>
       </div>
       <p class="text-blue-grey-lighten-1 font-weight-regular mt-3 mb-1">
