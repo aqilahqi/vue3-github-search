@@ -47,7 +47,8 @@
       <p class="text-blue-grey-lighten-1 font-weight-regular mt-3 mb-1">
         Topics
       </p>
-      <Topics :topics="item.topics" class="" />
+      <Topics :topics="item.topics" class="" v-if="item.topics.length > 0" />
+      <span v-else>—</span>
       <hr class="mt-5" />
     </template>
 
@@ -60,8 +61,13 @@
         <v-list-item-title>{{ item.owner.login }}</v-list-item-title>
 
         <template v-slot:append>
-          <v-btn variant="tonal" color="light" class="custom-btn"
-            >View <span class="d-none d-sm-flex">repository</span></v-btn
+          <v-btn
+            :href="item.html_url"
+            target="_blank"
+            variant="tonal"
+            color="light"
+            class="custom-btn"
+            >View <span class="d-none d-sm-flex ml-1">repository</span></v-btn
           >
         </template>
       </v-list-item>
