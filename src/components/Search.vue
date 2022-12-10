@@ -6,6 +6,7 @@
         hide-details
         :prepend-inner-icon="mdiMagnify"
         :disabled="loading"
+        :loading="loading"
         variant="underlined"
         placeholder="Search a repository..."
         v-model="store.searchWord"
@@ -46,7 +47,6 @@ const onSubmit = () => {
   store
     .getRepoList()
     .then((promise) => {
-      console.log(promise);
       loading.value = false;
     })
     .catch((error) => {
