@@ -4,6 +4,8 @@ Search github repositories using github API. User can mark a repo as favourite a
 
 I used `Vue 3`, `Vuetify`, `Pinia`, and `Axios`
 
+Demo is available <a href="https://vue3-github-search.netlify.app">here</a>
+
 ## Project Setup
 
 ```sh
