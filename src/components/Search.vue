@@ -4,13 +4,16 @@
       <v-text-field
         clearable
         hide-details
+        :prepend-inner-icon="mdiMagnify"
         :disabled="loading"
         variant="underlined"
-        placeholder="Search a repository"
+        placeholder="Search a repository..."
         v-model="store.searchWord"
+        class="custom-textfield"
+        color="secondary"
         @click:clear="onClear"
       ></v-text-field>
-      <v-btn
+      <!-- <v-btn
         size="large"
         color="primary"
         variant="plain"
@@ -18,7 +21,7 @@
         :disabled="disable"
         :loading="loading"
         type="submit"
-      ></v-btn>
+      ></v-btn> -->
     </v-form>
   </div>
 </template>
@@ -55,3 +58,25 @@ const onClear = () => {
   store.searchWord = "";
 };
 </script>
+<style lang="scss">
+@import "../scss/variables.scss";
+
+.custom-textfield {
+  .v-field__input {
+    padding-bottom: 10px !important;
+    &::placeholder {
+      color: $secondary;
+    }
+  }
+  .v-field__prepend-inner {
+    margin-top: 7px;
+    color: $secondary;
+  }
+  .v-field__clearable {
+    color: $secondary;
+  }
+  .v-field__outline::before {
+    border-color: $secondary;
+  }
+}
+</style>
