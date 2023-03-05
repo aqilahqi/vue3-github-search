@@ -13,11 +13,12 @@
           {{ item.full_name }}
         </h5>
         <v-btn
-          :icon="mdiBookmarkOutline"
+          :icon="item.saved ? mdiBookmark : mdiBookmarkOutline"
           variant="flat"
           color="white"
           class="text-dark custom-btn-icon"
           size="34"
+          @click="saveRepo"
         >
         </v-btn>
       </div>
@@ -86,12 +87,18 @@
 </template>
 
 <script setup>
+import { useRepoStore } from "@/stores/RepoStore";
 import Topics from "@/components/Topics.vue";
 import star from "@/assets/images/stars.png";
 import eye from "@/assets/images/eye-outline.png";
 import fork from "@/assets/images/source-fork.png";
 import { mdiBookmark, mdiBookmarkOutline } from "@mdi/js";
 const props = defineProps(["item"]);
+const repoStore = useRepoStore();
+
+const saveRepo = () => {
+  repoStore.saveRepo(props.item);
+};
 </script>
 
 <style lang="scss">

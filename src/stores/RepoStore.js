@@ -16,7 +16,6 @@ export const useRepoStore = defineStore("repoStore", {
       sort: "",
     },
     searchWord: "",
-    single: {},
     history: [],
   }),
   actions: {
@@ -34,6 +33,16 @@ export const useRepoStore = defineStore("repoStore", {
           .then((response) => {
             this.list = [];
             response.data.items.map((item) => {
+              const findSaved = this.history.find((repo) => repo.id == item.id);
+              if (findSaved) {
+                item = Object.assign(item, {
+                  saved: true,
+                });
+              } else {
+                item = Object.assign(item, {
+                  saved: false,
+                });
+              }
               this.list.push(item);
             });
             resolve("list retrieved");
@@ -42,6 +51,18 @@ export const useRepoStore = defineStore("repoStore", {
             reject(error);
           });
       });
+    },
+    saveRepo(repo) {
+      const find = this.history.find((list) => list.id == repo.id);
+      const toggleSave = this.list.findIndex((list) => list.id == repo.id);
+
+      if (!find) {
+        this.list[toggleSave].saved = !this.list[toggleSave].saved;
+        this.history.push(repo);
+      } else {
+        this.history = this.history.filter((history) => history.id !== repo.id);
+        this.list[toggleSave].saved = !this.list[toggleSave].saved;
+      }
     },
   },
 });
